@@ -1,0 +1,73 @@
+.feature-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px 20px;
+  margin: 0 20px 0 20px;
+  background: #117180;
+  border-radius: 12px;
+  font-family: 'Amatic SC';
+  margin-bottom: 20px;
+}
+
+.feature-card {
+  flex: 1 1 calc(25% - 20px);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 30px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.feature-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #D4AF37;
+}
+
+.feature-description {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.feature-header {
+  text-align: center;
+ margin: 25px; 
+}
+
+.feature-heading {
+  font-size: 30px;
+  margin-bottom: 10px;
+  display: inline-block;
+  /* Needed for underline width */
+  border-bottom: 4px solid #D4AF37;
+  /* Custom underline */
+  padding-bottom: 8px;
+  /* Space between text and underline */
+}
+
+
+.feature-subtext {
+  font-family: 'Amatic SC';
+
+}
+
+
+@media only screen and (max-width: 768px) {
+  .feature-section {
+    flex-direction: column;
+  }
+}

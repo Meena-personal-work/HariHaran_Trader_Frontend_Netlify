@@ -1,0 +1,98 @@
+.about-container {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 70px 0 0 0;
+    font-family: 'Amatic SC';
+    background-image: url('../../../public/crackers-bacground.jpg');
+    background-size: cover;
+}
+
+.about-container-without-img {
+    padding: 0 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-heading {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #D4AF37;
+    border-bottom: 3px solid #D4AF37;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.about-intro {
+    font-size: 18px;
+    max-width: 850px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.about-tile {
+color: #ffffff;
+
+    /* background-color: rgba(255, 255, 255, 0.05); */
+    background: #117180;
+    border-left: 4px solid #D4AF37;
+    margin: 30px auto;
+    padding: 25px 30px;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.about-tile:hover {
+    transform: translateY(-5px);
+}
+
+.about-tile h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #D4AF37;
+}
+
+.about-tile p,
+.about-tile ul {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.about-tile ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
+.about-tile li::before {
+    content: "🔥";
+    margin-right: 8px;
+    color: gold;
+}
+
+.about-contact {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 16px;
+    border-top: 1px solid #444;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .about-container {
+        background-image: none;
+    }
+
+    .about-tile{
+        text-align: justify;
+    }
+}

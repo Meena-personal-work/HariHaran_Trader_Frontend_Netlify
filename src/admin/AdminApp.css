@@ -1,0 +1,141 @@
+#root {
+  width: 100%;
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.app {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.search-area {
+  display: flex;
+  gap: 10px;
+}
+
+.search-area input {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.search-area button {
+  background: #4a90e2;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.search-area button:hover {
+  background: #357ab7;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.error {
+  background: #ffe5e5;
+  color: #e74c3c;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+}
+
+.layout {
+  display: flex;
+  padding: 2rem;
+}
+
+.sidebar {
+  position: fixed; /* Always stays on the left */
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh; /* Full height */
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+}
+
+.main-content {
+  margin-left: 220px; /* Push content so it doesn’t go under sidebar */
+  padding: 1rem;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative; /* On mobile, make it normal flow */
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .layout{
+    display:block ;
+  }
+}

@@ -1,0 +1,70 @@
+.cracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cracker-table th, .cracker-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.cracker-table th {
+  background-color: #f4f4f4;
+}
+
+.table-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.english {
+  font-weight: bold;
+}
+
+.tamil {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.original {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.discount {
+  font-weight: bold;
+  color: #2a9d8f;
+}
+
+.save-tag {
+  color: #e76f51;
+  font-weight: bold;
+}
+
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 15px;
+}
+
+.category-row td {
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #f7f7f7;
+  border-top: 2px solid #ccc;
+}
+
+
+@media (max-width: 480px) {
+  .cracker-table th, .cracker-table td {
+    padding: 0px;
+    font-size: 10px;
+  }
+
+ 
+
+}

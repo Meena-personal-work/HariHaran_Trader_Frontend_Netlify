@@ -1,0 +1,33 @@
+.cracker-marquee-wrapper {
+  text-align: center;
+  padding: 30px;
+  margin: 0 20px 0 20px;
+}
+
+.cracker-heading {
+  font-family: 'Amatic SC';
+  font-weight: 600;
+
+  font-size: 30px;
+  margin-bottom: 10px;
+  display: inline-block;
+  /* Needed for underline width */
+  border-bottom: 4px solid #D4AF37;
+  /* Custom underline */
+  padding-bottom: 8px;
+  /* Space between text and underline */
+}
+
+.cracker-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #117180;
+  color: white;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 20px 40px;
+  min-width: 200px;
+  white-space: nowrap;
+}

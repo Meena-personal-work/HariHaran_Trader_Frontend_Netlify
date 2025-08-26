@@ -1,0 +1,65 @@
+.header-container {
+    position: fixed;
+    background: linear-gradient(90deg, #0e1111 5%, #117180 100%);
+    height: 70px;
+    width: calc(100% - 30px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    padding: 0 15px 0 15px;
+}
+
+.header-logo {
+    height: 70px;
+}
+
+.menu-container {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+}
+
+.font-style-heading {
+    font-size: 25px;
+    font-family: 'Amatic SC';
+    line-height: 1.2em;
+    color: #ffffff;
+    margin: 15px 60px;
+}
+
+.header-menu {
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.header-menu:hover {
+    color: #D4AF37;
+}
+
+.herader-logo-name-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-name {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .font-style-heading {
+        font-size: 15px;
+    }
+
+    .header-name {
+        display: none;
+    }
+
+}

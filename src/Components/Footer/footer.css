@@ -1,0 +1,115 @@
+      .footer {
+        background: linear-gradient(90deg, #0e1111 50%, #117180 100%);
+        color: #fff;
+        padding: 40px 20px 10px;
+        font-family: 'Segoe UI', sans-serif;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .footer-section.links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-title {
+        font-size: 1.5rem;
+        color: #D4AF37;
+        margin-bottom: 10px;
+      }
+
+      .footer-section h4 {
+        margin-bottom: 12px;
+        font-size: 1.2rem;
+        color: #D4AF37;
+      }
+
+      .footer-section p,
+      .footer-section li,
+      .footer-section a {
+        color: #f0f0f0;
+        font-size: 0.95rem;
+        text-decoration: none;
+        line-height: 1.6;
+      }
+
+      .footer-section a:hover {
+        text-decoration: underline;
+        color: #D4AF37;
+      }
+
+      .footer-socials a {
+        font-size: 1.2rem;
+        margin-right: 10px;
+        color: #f0f0f0;
+        transition: color 0.3s ease;
+      }
+
+      .footer-socials a:hover {
+        color: #D4AF37;
+      }
+
+      .back-to-top {
+        margin-top: 15px;
+        background: none;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .back-to-top:hover {
+        background: #D4AF37;
+        color: #083b3a;
+      }
+
+      .footer-bottom {
+        margin-top: 20px;
+        text-align: center;
+        border-top: 1px solid #2f5f5d;
+        padding-top: 10px;
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+
+      .developer-name {
+        color: #D4AF37;
+        font-weight: 500;
+      }
+
+      .footer-section ul li {
+        list-style: none;
+      }
+
+
+      .footer-section ul {
+        padding: 0;
+      }
+
+      .site-map-ul {
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+
+
+      @media (max-width: 480px) {
+        .footer-section.links {
+          display: flex;
+          align-items: self-start;
+        }
+      }

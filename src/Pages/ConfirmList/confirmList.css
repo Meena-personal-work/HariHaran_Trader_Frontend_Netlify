@@ -1,0 +1,179 @@
+.list-container-confirmList {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.edit-container {
+  padding-top: 70px;
+  display: flex;
+  justify-content: end;
+}
+
+.edit-button {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: rgb(156, 153, 153);
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+  font-family: 'Helvetica';
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  margin: 15px 15px;
+  color: #117180;
+}
+
+.edit-button:hover {
+  background-color: rgb(183, 179, 179);
+}
+
+.input-container-confirmList {
+  display: flex;
+  flex-direction: column;
+  background: #117180;
+  min-height: 280px;
+  justify-content: space-around;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+  margin-top: 90px;
+  width: 30%;
+
+}
+
+.customer-container-title {
+  color: #ffffff;
+}
+
+.full-input-container {
+  display: flex;
+  justify-content: center;
+}
+
+.customer-inputbox-confirmList {
+  width: 40%;
+  margin-left: 15px;
+  min-height: 25px;
+  border-radius: 6px;
+  font-family: 'Helvetica';
+  line-height: 1.2em;
+  font-size: 16px;
+  border-color: #e7e1e1;
+  word-break: break-word;
+}
+
+.customer-inputbox-name-confirmList {
+  width: 40%;
+  margin-left: 30px;
+  min-height: 25px;
+  border-radius: 6px;
+  font-family: 'Helvetica';
+  line-height: 1.2em;
+  font-size: 17px;
+  border-color: #e7e1e1;
+  word-break: break-word;
+}
+
+.customer-inputbox-address-confirmList {
+  width: 40%;
+  min-height: 21px;
+  margin-left: 15px;
+  border-radius: 6px;
+  font-family: 'Helvetica';
+  line-height: 1.2em;
+  font-size: 16px;
+  border-color: #e7e1e1;
+  word-break: break-word;
+}
+
+.crackersGif-confirmList {
+  width: 45%;
+  background-image: url("../../../public/crackers-gif4.gif");
+  background-repeat: no-repeat;
+  background-size: 55%;
+  margin-top: 65px;
+}
+
+.Confirm-order {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: rgb(156, 153, 153);
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  font-family: 'Amatic SC';
+  cursor: pointer;
+  width: 160px;
+  color: white;
+  background-color: #117180;
+}
+
+.Confirm-order:hover {
+  background-color: rgb(55, 202, 39);
+}
+
+.button-container-confirmList {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.download-container {
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 22px;
+  font-family: 'Amatic SC';
+  cursor: pointer;
+  width: 98%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.pdf-download-btn {
+  background-color: #25D366;
+  /* WhatsApp green */
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.whatsapp-download-text {
+  text-decoration: underline;
+  text-decoration-color: #25D366;
+}
+
+
+
+.pdf-download-btn:hover {
+  background-color: #1ebe5d;
+}
+
+.pdf-download-btn-container {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+
+@media only screen and (max-width: 900px) {
+  .crackersGif-confirmList {
+    display: none;
+  }
+
+  .input-container-confirmList {
+    width: 75%;
+  }
+}

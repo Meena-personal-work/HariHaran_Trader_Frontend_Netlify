@@ -1,0 +1,95 @@
+/* login.css */
+
+/* Full page background */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+     background: linear-gradient(90deg, #0e1111 5%, #117180 100%);
+     font-family: 'Amatic SC';
+
+}
+
+/* Card container */
+.login-card {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.login-card h2 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+}
+
+/* Input group styling */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: calc(100% - 30px);
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #000dff;
+  box-shadow: 0 0 5px rgba(0, 13, 255, 0.3);
+}
+
+/* Button styling */
+.login-btn {
+  width: 100%;
+  padding: 12px 0;
+   background-color: #D4AF37;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: #117180;
+  color: #D4AF37;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-card {
+    margin: 30px 20px;
+  }
+
+  .login-card h2 {
+    font-size: 24px;
+  }
+}

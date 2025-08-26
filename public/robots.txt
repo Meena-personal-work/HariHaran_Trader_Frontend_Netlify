@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+  User-agent: *
+  SITEMAP: https://ayyancrackerhari.in/sitemap.xml
+  
+  User-agent: AdsBot-Google
+  Disallow: /

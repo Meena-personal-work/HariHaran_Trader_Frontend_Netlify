@@ -1,0 +1,24 @@
+.home-container {
+  padding: 70px 0 0 0;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.video-section {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .video-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0 10px;
+  }
+
+}
