@@ -36,7 +36,7 @@
 
 
 import { useState } from "react";
-import { currencyINR, percentOff } from "../../utils/formatters";
+import { currencyINR } from "../../utils/formatters";
 import "./crackerRow.css"
 
 export default function CrackerRow({ item, onEdit, onDelete }) {

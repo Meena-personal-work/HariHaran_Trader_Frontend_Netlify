@@ -157,7 +157,7 @@ export default function CrackersPage() {
   const [selectedBrand, setSelectedBrand] = useState("hariharan"); // ✅ Default
 
   // ✅ For notification count
-  const [initialCount, setInitialCount] = useState(0);
+  const [setInitialCount] = useState(0);
 
   const pendingCount = customers.filter(
     (c) => statusMap[c._id] === "pending"

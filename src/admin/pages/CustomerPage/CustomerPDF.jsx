@@ -108,7 +108,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Font,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 
