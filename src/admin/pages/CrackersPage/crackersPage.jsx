@@ -176,7 +176,7 @@ export default function CrackersPage() {
 useEffect(() => {
   fetchAll(selectedBrand);
   fetchCustomers().then(() => {
-    setInitialCount(customers.length);
+    setInitialCount(customers.length, initialCount);
   });
 }, [selectedBrand, initialCount]);
 
