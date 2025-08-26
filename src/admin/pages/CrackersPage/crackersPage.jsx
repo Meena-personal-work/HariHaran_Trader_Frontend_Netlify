@@ -178,7 +178,7 @@ useEffect(() => {
   fetchCustomers().then(() => {
     setInitialCount(customers.length);
   });
-}, [selectedBrand, fetchAll, fetchCustomers, customers.length, initialCount]);
+}, [selectedBrand, initialCount]);
 
 
   const handleDeleteConfirm = () => {
