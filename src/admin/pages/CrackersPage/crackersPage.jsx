@@ -173,13 +173,13 @@ export default function CrackersPage() {
     }
   }, [customers]);
 
-  // ✅ Load brand-based crackers
-  useEffect(() => {
-    fetchAll(selectedBrand);
-    fetchCustomers().then(() => {
-      setInitialCount(customers.length);
-    });
-  }, [selectedBrand]);
+useEffect(() => {
+  fetchAll(selectedBrand);
+  fetchCustomers().then(() => {
+    setInitialCount(customers.length);
+  });
+}, [selectedBrand, fetchAll, fetchCustomers, customers.length]);
+
 
   const handleDeleteConfirm = () => {
     removeOne(deleteId);
@@ -202,7 +202,7 @@ export default function CrackersPage() {
   };
 
   // ✅ Calculate new customers after page load
-  const newCustomerCount = customers.length - initialCount;
+  // const newCustomerCount = customers.length - initialCount;
 
   return (
     <>

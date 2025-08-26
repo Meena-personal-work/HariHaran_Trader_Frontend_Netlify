@@ -38,7 +38,7 @@ const ConfirmListPage = ({
   downloaded,
   brand
 }) => {
-  const [selectedItemsPdf, setSelectedItemsPdf] = useState([]);
+  const [setSelectedItemsPdf] = useState([]);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
 
@@ -136,11 +136,11 @@ const handleConfirmOrder = async () => {
     toast.success("Order submitted successfully!");
     confetti({ particleCount: 200, spread: 160, origin: { y: 0.6 } });
 
-    // Generate PDF
-    const formatDate = (date) => {
-      const d = new Date(date);
-      return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-    };
+    // // Generate PDF
+    // const formatDate = (date) => {
+    //   const d = new Date(date);
+    //   return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    // };
 
     const MyDocument = (
       <Document>

@@ -41,7 +41,7 @@ import "./crackerRow.css"
 
 export default function CrackerRow({ item, onEdit, onDelete }) {
   const [loading, setLoading] = useState(true);
-  const pct = percentOff(item.originalRate, item.discountRate);
+  // const pct = percentOff(item.originalRate, item.discountRate);
 
  
   return (
