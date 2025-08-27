@@ -307,21 +307,17 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
-  // eslint-disable-next-line no-unused-vars
   const [initialCount, setInitialCount] = useState(0);
-  console.log('====================================');
-  console.log(initialCount);
-  console.log('====================================');
 
   // Memoized fetch functions to prevent multiple network calls
   const fetchCustomers = useCallback(async () => {
     const data = await fetchCustomersFromHook();
     setInitialCount(data?.length || 0);
-  }, [fetchCustomersFromHook, setInitialCount]); // ✅ added setInitialCount
+  }, [setInitialCount, initialCount]); // ✅ added setInitialCount
 
   const fetchCrackersForBrand = useCallback(() => {
     fetchCrackers(selectedBrand);
-  }, [fetchCrackers, selectedBrand]);
+  }, [selectedBrand]);
 
   // Pending customers count
   const pendingCount = customers.filter(
@@ -343,7 +339,7 @@ export default function CrackersPage() {
   useEffect(() => {
     fetchCrackersForBrand();
     fetchCustomers();
-  }, [fetchCrackersForBrand, fetchCustomers]);
+  }, []);
 
   // Handlers
   const handleDeleteConfirm = () => {
@@ -378,13 +374,13 @@ export default function CrackersPage() {
       {/* Brand Switcher */}
       <div className="brand-buttons">
         <button
-          className={`brand-btn ${selectedBrand === "hariharan" ? "active" : ""}`}
+          className={`brand-btn ${selectedBrand}` === "hariharan" ? "active" : ""}
           onClick={() => setSelectedBrand("hariharan")}
         >
           Hariharan
         </button>
         <button
-          className={`brand-btn ${selectedBrand === "ayyan" ? "active" : ""}`}
+          className={`brand-btn ${selectedBrand}` === "ayyan" ? "active" : ""}
           onClick={() => setSelectedBrand("ayyan")}
         >
           Ayyan
@@ -401,7 +397,7 @@ export default function CrackersPage() {
       {/* Form */}
       {showForm && (
         <section>
-          <h2>{editing ? "Edit Cracker" : "Add New Cracker"}</h2>
+          <h2>{`editing ? "Edit Cracker" : "Add New Cracker"`}</h2>
           <CrackerForm
             defaults={editing}
             onSubmit={handleFormSubmit}
@@ -419,7 +415,7 @@ export default function CrackersPage() {
         {loading ? (
           <div className="loading">Loading...</div>
         ) : (
-          <CrackerList
+           <CrackerList
             items={items}
             onEdit={(cracker) => {
               setEditing(cracker);
@@ -438,6 +434,6 @@ export default function CrackersPage() {
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteId(null)}
       />
-    </>
-  );
+      </>
+  )
 }
