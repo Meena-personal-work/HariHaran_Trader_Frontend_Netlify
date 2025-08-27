@@ -216,6 +216,9 @@ export default function CrackersPage() {
     setShowForm(false);
   };
 
+  // ✅ Calculate new customers after page load
+  // const newCustomerCount = customers.length - initialCount;
+
   return (
     <>
       {/* Header with refresh + notification */}
@@ -225,21 +228,21 @@ export default function CrackersPage() {
         newCustomerCount={pendingCount}
       />
 
-      {/* Brand Switcher */}
-      <div className="brand-buttons">
-        <button
-          className={`brand-btn ${selectedBrand === "hariharan" ? "active" : ""}`}
-          onClick={() => setSelectedBrand("hariharan")}
-        >
-          Hariharan
-        </button>
-        <button
-          className={`brand-btn ${selectedBrand === "ayyan" ? "active" : ""}`}
-          onClick={() => setSelectedBrand("ayyan")}
-        >
-          Ayyan
-        </button>
-      </div>
+      {/* ✅ Brand Switcher */}
+     <div className="brand-buttons">
+  <button
+    className={`brand-btn ${selectedBrand === "hariharan" ? "active" : ""}`}
+    onClick={() => setSelectedBrand("hariharan")}
+  >
+    Hariharan
+  </button>
+  <button
+    className={`brand-btn ${selectedBrand === "ayyan" ? "active" : ""}`}
+    onClick={() => setSelectedBrand("ayyan")}
+  >
+    Ayyan
+  </button>
+</div>
 
       {/* Add Cracker */}
       <button className="add-cracker-btn" onClick={handleAddCracker}>
@@ -252,12 +255,13 @@ export default function CrackersPage() {
       {showForm && (
         <section>
           <h2>{editing ? "Edit Cracker" : "Add New Cracker"}</h2>
-          <CrackerForm
-            defaults={editing}
-            onSubmit={handleFormSubmit}
-            onCancel={() => setShowForm(false)}
-            selectedBrand={selectedBrand}
-          />
+       <CrackerForm
+  defaults={editing}
+  onSubmit={handleFormSubmit}
+  onCancel={() => setShowForm(false)}
+  selectedBrand={selectedBrand}   // ✅ added
+/>
+
         </section>
       )}
 
