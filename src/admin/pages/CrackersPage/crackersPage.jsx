@@ -156,6 +156,7 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan"); // default brand
+  // eslint-disable-next-line no-unused-vars
   const [initialCount, setInitialCount] = useState(0);
 
   const pendingCount = customers.filter(
