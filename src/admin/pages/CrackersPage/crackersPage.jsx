@@ -307,13 +307,13 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
-  const [setInitialCount] = useState(0);
+  const [initialCount, setInitialCount] = useState(0);
 
   // Memoized fetch functions to prevent multiple network calls
   const fetchCustomers = useCallback(async () => {
     const data = await fetchCustomersFromHook();
     setInitialCount(data?.length || 0);
-  }, [fetchCustomersFromHook]);
+  }, [fetchCustomersFromHook, setInitialCount]); // ✅ added setInitialCount
 
   const fetchCrackersForBrand = useCallback(() => {
     fetchCrackers(selectedBrand);
