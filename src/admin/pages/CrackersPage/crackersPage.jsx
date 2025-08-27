@@ -278,7 +278,7 @@
 //   );
 // }
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useCrackers from "../../hooks/useCrackers";
 import CrackerForm from "../../components/CrackerForm/CrackerForm";
 import CrackerList from "../../components/CrackerList/CrackerList";
@@ -293,21 +293,31 @@ export default function CrackersPage() {
     items,
     loading,
     error,
-    fetchAll,
+    fetchAll: fetchCrackers,
     createOne,
     updateOne,
     removeOne,
     toggleOne,
   } = useCrackers();
 
-  const { customers, fetchAll: fetchCustomers } = useCustomers();
+  const { customers, fetchAll: fetchCustomersFromHook } = useCustomers();
 
   const [editing, setEditing] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
-  const [selectedBrand, setSelectedBrand] = useState("hariharan"); // Default brand
+  const [selectedBrand, setSelectedBrand] = useState("hariharan");
   const [initialCount, setInitialCount] = useState(0);
+
+  // Memoized fetch functions to prevent multiple network calls
+  const fetchCustomers = useCallback(async () => {
+    const data = await fetchCustomersFromHook();
+    setInitialCount(data?.length || 0);
+  }, [fetchCustomersFromHook]);
+
+  const fetchCrackersForBrand = useCallback(() => {
+    fetchCrackers(selectedBrand);
+  }, [fetchCrackers, selectedBrand]);
 
   // Pending customers count
   const pendingCount = customers.filter(
@@ -325,13 +335,11 @@ export default function CrackersPage() {
     }
   }, [customers]);
 
-  // Fetch crackers and customers when brand changes
+  // Fetch data when brand changes
   useEffect(() => {
-    fetchAll(selectedBrand);
-    fetchCustomers().then((fetchedCustomers) => {
-      setInitialCount(fetchedCustomers?.length || 0);
-    });
-  }, [selectedBrand, fetchAll, fetchCustomers]);
+    fetchCrackersForBrand();
+    fetchCustomers();
+  }, [fetchCrackersForBrand, fetchCustomers]);
 
   // Handlers
   const handleDeleteConfirm = () => {
@@ -356,10 +364,10 @@ export default function CrackersPage() {
 
   return (
     <>
-      {/* Header with refresh + notifications */}
+      {/* Header */}
       <Header
         title="Crackers"
-        onRefresh={() => fetchAll(selectedBrand)}
+        onRefresh={fetchCrackersForBrand}
         newCustomerCount={pendingCount}
       />
 
