@@ -418,7 +418,7 @@ export default function CrackersPage() {
             onToggle={toggleOne}
           />
         )}
-      </section>
+      </section> 
 
       <ConfirmModal
         open={!!deleteId}
