@@ -307,7 +307,7 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
-  const [initialCount, setInitialCount] = useState(0);
+  const [setInitialCount] = useState(0);
 
   // Memoized fetch functions to prevent multiple network calls
   const fetchCustomers = useCallback(async () => {
