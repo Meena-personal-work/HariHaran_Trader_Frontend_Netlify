@@ -307,7 +307,11 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
+  // eslint-disable-next-line no-unused-vars
   const [initialCount, setInitialCount] = useState(0);
+  console.log('====================================');
+  console.log(initialCount);
+  console.log('====================================');
 
   // Memoized fetch functions to prevent multiple network calls
   const fetchCustomers = useCallback(async () => {
