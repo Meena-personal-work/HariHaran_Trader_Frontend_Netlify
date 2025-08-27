@@ -280,11 +280,10 @@
 
 import { useEffect, useState, useCallback } from "react";
 import useCrackers from "../../hooks/useCrackers";
+import useCustomers from "../../hooks/useCustomers";
 import CrackerForm from "../../components/CrackerForm/CrackerForm";
 import CrackerList from "../../components/CrackerList/CrackerList";
 import ConfirmModal from "../../components/ConfirmModal/confirmModal";
-import useCustomers from "../../hooks/useCustomers";
-
 import Header from "../../components/Header/header";
 import "./crackersPage.css";
 
@@ -308,44 +307,47 @@ export default function CrackersPage() {
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
 
-const fetchCustomers = useCallback(async () => {
-  await fetchCustomersFromHook();
-}, [fetchCustomersFromHook]);
+  // -------------------------
+  // Fetch customers once on mount
+  // -------------------------
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchCustomersFromHook(); // fetch customers
+      fetchCrackers(selectedBrand);   // fetch crackers for default brand
+    };
+    fetchData();
+  }, []); // empty dependency → runs once
 
-const fetchCrackersForBrand = useCallback(() => {
-  fetchCrackers(selectedBrand);
-}, [fetchCrackers, selectedBrand]); // include fetchCrackers too
+  // -------------------------
+  // Fetch crackers when brand changes
+  // -------------------------
+  useEffect(() => {
+    fetchCrackers(selectedBrand);
+  }, [selectedBrand]); // only runs on brand change
 
+  // -------------------------
+  // Set initial status map
+  // -------------------------
+  useEffect(() => {
+    if (customers.length) {
+      const map = {};
+      customers.forEach((c) => {
+        map[c._id] = c.status || "pending";
+      });
+      setStatusMap(map);
+    }
+  }, [customers]);
 
-
+  // -------------------------
   // Pending customers count
+  // -------------------------
   const pendingCount = customers.filter(
     (c) => statusMap[c._id] === "pending"
   ).length;
 
-  // Set statusMap when customers change
-  useEffect(() => {
-    if (customers.length > 0) {
-      const initialStatuses = {};
-      customers.forEach((c) => {
-        initialStatuses[c._id] = c.status || "pending";
-      });
-      setStatusMap(initialStatuses);
-    }
-  }, [customers]);
-
-// Fetch customers once on mount
-useEffect(() => {
-  fetchCustomers();
-}, [fetchCustomers]);
-
-// Fetch crackers whenever brand changes
-useEffect(() => {
-  fetchCrackersForBrand();
-}, [fetchCrackersForBrand]);
-
-
+  // -------------------------
   // Handlers
+  // -------------------------
   const handleDeleteConfirm = () => {
     removeOne(deleteId);
     setDeleteId(null);
@@ -368,37 +370,30 @@ useEffect(() => {
 
   return (
     <>
-      {/* Header */}
       <Header
         title="Crackers"
-        onRefresh={fetchCrackersForBrand}
+        onRefresh={() => fetchCrackers(selectedBrand)}
         newCustomerCount={pendingCount}
       />
 
-      {/* Brand Switcher */}
       <div className="brand-buttons">
-        <button
-          className={`brand-btn ${selectedBrand === "hariharan" ? "active" : ""}`}
-          onClick={() => setSelectedBrand("hariharan")}
-        >
-          Hariharan
-        </button>
-        <button
-          className={`brand-btn ${selectedBrand === "ayyan" ? "active" : ""}`}
-          onClick={() => setSelectedBrand("ayyan")}
-        >
-          Ayyan
-        </button>
+        {["hariharan", "ayyan"].map((brand) => (
+          <button
+            key={brand}
+            className={`brand-btn ${selectedBrand === brand ? "active" : ""}`}
+            onClick={() => setSelectedBrand(brand)}
+          >
+            {brand.charAt(0).toUpperCase() + brand.slice(1)}
+          </button>
+        ))}
       </div>
 
-      {/* Add cracker button */}
       <button className="add-cracker-btn" onClick={handleAddCracker}>
         Add Cracker
       </button>
 
       {error && <div className="error">{error}</div>}
 
-      {/* Form */}
       {showForm && (
         <section>
           <h2>{editing ? "Edit Cracker" : "Add New Cracker"}</h2>
@@ -411,27 +406,20 @@ useEffect(() => {
         </section>
       )}
 
-      {/* Cracker list */}
       <section>
-        <h2>
-          {selectedBrand} Crackers ({items.length})
-        </h2>
+        <h2>{selectedBrand} Crackers ({items.length})</h2>
         {loading ? (
           <div className="loading">Loading...</div>
         ) : (
           <CrackerList
             items={items}
-            onEdit={(cracker) => {
-              setEditing(cracker);
-              setShowForm(true);
-            }}
+            onEdit={(cracker) => { setEditing(cracker); setShowForm(true); }}
             onDelete={(id) => setDeleteId(id)}
             onToggle={toggleOne}
           />
         )}
       </section>
 
-      {/* Delete confirmation modal */}
       <ConfirmModal
         open={!!deleteId}
         message="Are you sure you want to delete this cracker?"
