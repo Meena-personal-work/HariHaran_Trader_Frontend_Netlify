@@ -307,7 +307,6 @@ export default function CrackersPage() {
   const [showForm, setShowForm] = useState(false);
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
-  // const [initialCount, setInitialCount] = useState(0);
 
   // ✅ Memoized fetch functions
   const fetchCustomers = useCallback(async () => {
@@ -335,6 +334,7 @@ export default function CrackersPage() {
   }, [customers]);
 
   // ✅ Fetch customers only once on mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchCustomers();
   }, []);
