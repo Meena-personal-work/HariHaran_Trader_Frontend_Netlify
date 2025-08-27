@@ -308,14 +308,15 @@ export default function CrackersPage() {
   const [statusMap, setStatusMap] = useState({});
   const [selectedBrand, setSelectedBrand] = useState("hariharan");
 
-  // ✅ Memoized fetch functions
-  const fetchCustomers = useCallback(async () => {
-    await fetchCustomersFromHook();
-  }, [fetchCustomersFromHook]);
+const fetchCustomers = useCallback(async () => {
+  await fetchCustomersFromHook();
+}, [fetchCustomersFromHook]);
 
-  const fetchCrackersForBrand = useCallback(() => {
-    fetchCrackers(selectedBrand);
-  }, [selectedBrand]);
+const fetchCrackersForBrand = useCallback(() => {
+  fetchCrackers(selectedBrand);
+}, [fetchCrackers, selectedBrand]); // include fetchCrackers too
+
+
 
   // Pending customers count
   const pendingCount = customers.filter(
@@ -333,16 +334,16 @@ export default function CrackersPage() {
     }
   }, [customers]);
 
-  // ✅ Fetch customers only once on mount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    fetchCustomers();
-  }, []);
+// Fetch customers once on mount
+useEffect(() => {
+  fetchCustomers();
+}, [fetchCustomers]);
 
-  // // ✅ Fetch crackers whenever selectedBrand changes
-  useEffect(() => {
-    fetchCrackersForBrand();
-  }, [fetchCrackersForBrand]);
+// Fetch crackers whenever brand changes
+useEffect(() => {
+  fetchCrackersForBrand();
+}, [fetchCrackersForBrand]);
+
 
   // Handlers
   const handleDeleteConfirm = () => {
