@@ -1,95 +1,154 @@
-// import { currencyINR, percentOff } from "../../utils/formatters";
+
+
+// import { useState } from "react";
+// import { currencyINR } from "../../utils/formatters";
+// import "./crackerRow.css"
 
 // export default function CrackerRow({ item, onEdit, onDelete }) {
-//   const pct = percentOff(item.originalRate, item.discountRate);
+//   const [loading, setLoading] = useState(true);
+//   // const pct = percentOff(item.originalRate, item.discountRate);
 
+ 
 //   return (
-//     <tr>
+//     <tr className="crackers-tableRow">
 //       {/* Image */}
-//       <td>
-//         <img src={item.imageUrl} alt={item.englishName} className="table-image" />
+//       <td style={{ textAlign: "center" }}>
+//         <img
+//           src={item.imageUrl}
+//           alt={item.englishName}
+//           onLoad={() => setLoading(false)}
+//           style={{
+//             width: "60px",
+//             height: "60px",
+//             objectFit: "cover",
+//             borderRadius: "6px",
+//             display: loading ? "none" : "block",
+//           }}
+//         />
 //       </td>
 
-//       {/* English + Tamil Name */}
+//       {/* Names */}
 //       <td>
-//         <div className="english">{item.englishName}</div>
-//         <div className="tamil">{item.tamilName}</div>
+//         <div>{item.englishName}</div>
+//         <div style={{ marginTop: "5px", color: "#666" }}>{item.tamilName}</div>
 //       </td>
 
-//       {/* Original & Discount Rate */}
-//       <td>
-//         <span className="original">{currencyINR(item.originalRate)}</span> /{" "}
-//         <span className="discount">{currencyINR(item.discountRate)}</span>
+//       {/* Original Rate */}
+//       <td style={{ textAlign: "center", textDecoration: "line-through" }}>
+//         {currencyINR(item.originalRate)}
 //       </td>
 
-//       {/* % Save */}
-//       <td className="save-tag">Save {pct}%</td>
+//       {/* Discount Rate */}
+//       <td style={{ textAlign: "center" }}>{currencyINR(item.discountRate)}</td>
+
+//       {/* Show/Hide Toggle */}
+//       <td style={{ textAlign: "center" }}>
+//           {item?.status===false?"Hidden":"Show"}
+//       </td>
 
 //       {/* Actions */}
-//       <td>
-//         <button className="btn btn-warning" onClick={() => onEdit(item)}>Edit</button>
-//         <button className="btn btn-danger" onClick={() => onDelete(item._id)}>Delete</button>
+//       <td className="crackers-edit-delete-btn" style={{ textAlign: "center" }}>
+//         <button className="cracker-row-btn btn-warning" onClick={() => {
+//  window.scrollTo({ top: 0, behavior: "smooth" });
+//           onEdit(item)
+//           }}>
+//           Edit
+//         </button>
+//         <button className="cracker-row-btn  btn-danger" onClick={() => onDelete(item._id)}>
+//           Delete
+//         </button>
 //       </td>
 //     </tr>
 //   );
 // }
-
-
 import { useState } from "react";
 import { currencyINR } from "../../utils/formatters";
-import "./crackerRow.css"
+import "./crackerRow.css";
 
 export default function CrackerRow({ item, onEdit, onDelete }) {
   const [loading, setLoading] = useState(true);
-  // const pct = percentOff(item.originalRate, item.discountRate);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
- 
   return (
-    <tr className="tableRow">
-      {/* Image */}
-      <td style={{ textAlign: "center" }}>
-        <img
-          src={item.imageUrl}
-          alt={item.englishName}
-          onLoad={() => setLoading(false)}
-          style={{
-            width: "60px",
-            height: "60px",
-            objectFit: "cover",
-            borderRadius: "6px",
-            display: loading ? "none" : "block",
-          }}
-        />
-      </td>
+    <>
+      <tr className="crackers-tableRow">
+        {/* Image */}
+        <td style={{ textAlign: "center", position: "relative" }}>
+          {loading && (
+            <div className="image-loader">
+              <div className="spinner"></div>
+            </div>
+          )}
 
-      {/* Names */}
-      <td>
-        <div>{item.englishName}</div>
-        <div style={{ marginTop: "5px", color: "#666" }}>{item.tamilName}</div>
-      </td>
+          <img
+            src={item.imageUrl}
+            alt={item.englishName}
+            onLoad={() => setLoading(false)}
+            onError={() => setLoading(false)} // stop loader if error
+            onClick={() => setPreviewOpen(true)}
+            style={{
+              width: "60px",
+              height: "60px",
+              objectFit: "cover",
+              borderRadius: "6px",
+              display: loading ? "none" : "block",
+              cursor: "pointer",
+            }}
+          />
+        </td>
 
-      {/* Original Rate */}
-      <td style={{ textAlign: "center", textDecoration: "line-through" }}>
-        {currencyINR(item.originalRate)}
-      </td>
+        {/* Names */}
+        <td>
+          <div>{item.englishName}</div>
+          <div style={{ marginTop: "5px", color: "#666" }}>
+            {item.tamilName}
+          </div>
+        </td>
 
-      {/* Discount Rate */}
-      <td style={{ textAlign: "center" }}>{currencyINR(item.discountRate)}</td>
+        {/* Original Rate */}
+        <td style={{ textAlign: "center", textDecoration: "line-through" }}>
+          {currencyINR(item.originalRate)}
+        </td>
 
-      {/* Show/Hide Toggle */}
-      <td style={{ textAlign: "center" }}>
-          {item?.status===false?"Hidden":"Show"}
-      </td>
+        {/* Discount Rate */}
+        <td style={{ textAlign: "center" }}>{currencyINR(item.discountRate)}</td>
 
-      {/* Actions */}
-      <td style={{ textAlign: "center" }}>
-        <button className="cracker-row-btn btn-warning" onClick={() => onEdit(item)}>
-          Edit
-        </button>
-        <button className="cracker-row-btn  btn-danger" onClick={() => onDelete(item._id)}>
-          Delete
-        </button>
-      </td>
-    </tr>
+        {/* Show/Hide Toggle */}
+        <td style={{ textAlign: "center" }}>
+          {item?.status === false ? "Hidden" : "Show"}
+        </td>
+
+        {/* Actions */}
+        <td
+          className="crackers-edit-delete-btn"
+          style={{ textAlign: "center" }}
+        >
+          <button
+            className="cracker-row-btn btn-warning"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              onEdit(item);
+            }}
+          >
+            Edit
+          </button>
+          <button
+            className="cracker-row-btn btn-danger"
+            onClick={() => onDelete(item._id)}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+
+      {/* ✅ Image Preview Modal */}
+      {previewOpen && (
+        <div className="preview-overlay" onClick={() => setPreviewOpen(false)}>
+          <div className="preview-container">
+            <img src={item.imageUrl} alt={item.englishName} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
