@@ -41,6 +41,7 @@ const ConfirmListPage = ({
   // const [setSelectedItemsPdf] = useState([]);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+const [loading, setLoading] = useState(false);
 
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
@@ -88,7 +89,9 @@ const ConfirmListPage = ({
   };
 
 const handleConfirmOrder = async () => {
-  if (!isFormValid) return;
+ if (!isFormValid || loading) return; // block if already processing
+setLoading(true);
+
 
   const orderNumber = generateNumber(); // unique order number
   const orderDate = getOrderDate() // proper Date object for backend
@@ -108,6 +111,7 @@ const handleConfirmOrder = async () => {
 
   if (selectedCrackers.length === 0) {
     toast.error("No crackers selected!");
+     setLoading(false);
     return;
   }
 
@@ -136,9 +140,18 @@ const handleConfirmOrder = async () => {
       throw new Error(errorData.error || "Failed to save order");
     }
 
-      // ===== 2. Save into Google Sheets =====
-    const formUrl =
-      "https://script.google.com/macros/s/AKfycbw5GhqEY7at54dkosbN4LCMID9_Q3qWew8hr20w8yj7MBpVl8W2lZgS7Rsuqn9guslS/exec?sheet=Hari Haran Trader's Customer";
+    // const formUrl ="https://script.google.com/macros/s/AKfycbw5GhqEY7at54dkosbN4LCMID9_Q3qWew8hr20w8yj7MBpVl8W2lZgS7Rsuqn9guslS/exec?sheet=Hari Haran Trader's Customer";
+    // ===== 2. Save into Google Sheets =====
+let formUrl = "";
+
+if (brand === "ayyan") {
+  formUrl =
+    "https://script.google.com/macros/s/AKfycbw5GhqEY7at54dkosbN4LCMID9_Q3qWew8hr20w8yj7MBpVl8W2lZgS7Rsuqn9guslS/exec?sheet=Ayyan's Crackers Customer";
+} else {
+  formUrl =
+    "https://script.google.com/macros/s/AKfycbw5GhqEY7at54dkosbN4LCMID9_Q3qWew8hr20w8yj7MBpVl8W2lZgS7Rsuqn9guslS/exec?sheet=Hari Haran Trader's Customer";
+}
+
 
     const formData = new URLSearchParams();
     formData.append("customerName", customerName);
@@ -239,7 +252,10 @@ const handleConfirmOrder = async () => {
   } catch (error) {
     console.error("Submission error:", error);
     toast.error("Error submitting order: " + error.message);
+  }finally {
+    setLoading(false); // unlock button
   }
+  
 };
 
   return (
@@ -306,17 +322,18 @@ const handleConfirmOrder = async () => {
       </div>
 
       <div className="button-container-confirmList">
-        <button
-          className="Confirm-order"
-          onClick={handleConfirmOrder}
-          disabled={!isFormValid}
-          style={{
-            opacity: isFormValid ? 1 : 0.6,
-            cursor: isFormValid ? "pointer" : "not-allowed",
-          }}
-        >
-          Confirm Order
-        </button>
+      <button
+  className="Confirm-order"
+  onClick={handleConfirmOrder}
+  disabled={!isFormValid || loading}
+  style={{
+    opacity: isFormValid && !loading ? 1 : 0.6,
+    cursor: isFormValid && !loading ? "pointer" : "not-allowed",
+  }}
+>
+  {loading ? "Processing..." : "Confirm Order"}
+</button>
+
       </div>
 
       <div style={{ height: "100px" }} ref={scrollRef}></div>

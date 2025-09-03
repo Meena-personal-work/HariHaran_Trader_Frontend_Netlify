@@ -242,7 +242,9 @@
 import React, { useEffect, useState } from "react";
 import useCustomers from "../../hooks/useCustomers";
 import { CustomerPDF, CustomerPDFDownload } from "./CustomerPDF";
-import { PDFViewer, pdf } from "@react-pdf/renderer";
+// import { PDFViewer, pdf } from "@react-pdf/renderer";
+import {  pdf } from "@react-pdf/renderer";
+
 import Header from "../../components/Header/header";
 import ConfirmModal from "../../components/ConfirmModal/confirmModal"; // ✅ Import modal
 import {
@@ -258,6 +260,36 @@ const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 // ✅ Detect if user is on mobile
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+// ✅ Inline PDF preview using iframe (matches download version)
+function PdfPreview({ customer }) {
+  const [blobUrl, setBlobUrl] = useState(null);
+
+  useEffect(() => {
+    const generatePdf = async () => {
+      const blob = await pdf(<CustomerPDF customer={customer} />).toBlob();
+      setBlobUrl(URL.createObjectURL(blob));
+    };
+    generatePdf();
+
+    return () => {
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
+    };
+  }, [customer]);
+
+  if (!blobUrl) return <p>Loading PDF preview...</p>;
+
+  return (
+    <iframe
+      src={blobUrl}
+      width="100%"
+      height="400"
+      style={{ border: "none" }}
+      title="Order PDF"
+    />
+  );
+}
+
 
 export default function CustomersPage() {
   const { customers, loading, error, fetchAll, deleteDispatched } =
@@ -457,9 +489,11 @@ export default function CustomersPage() {
                             border: "1px solid #ccc",
                           }}
                         >
-                          <PDFViewer width="100%" height={400}>
+                          {/* <PDFViewer width="100%" height={400}>
                             <CustomerPDF customer={c} />
-                          </PDFViewer>
+                          </PDFViewer> */}
+                          <PdfPreview customer={c} />
+
                         </div>
                       ) : (
                         <button
