@@ -133,6 +133,29 @@ const handleConfirmOrder = async () => {
       throw new Error(errorData.error || "Failed to save order");
     }
 
+      // ===== 2. Save into Google Sheets =====
+    const formUrl =
+      "https://script.google.com/macros/s/AKfycbw5GhqEY7at54dkosbN4LCMID9_Q3qWew8hr20w8yj7MBpVl8W2lZgS7Rsuqn9guslS/exec?sheet=Hari Haran Trader's Customer";
+
+    const formData = new URLSearchParams();
+    formData.append("customerName", customerName);
+    formData.append("customerNumber", customerNumber);
+    formData.append("customerAddress", customerAddress);
+    formData.append("customerState", customerState);
+    formData.append("totalRate", totalRate);
+
+    // Optionally also store items as JSON string (so you can expand later)
+    // formData.append("items", JSON.stringify(selectedCrackers));
+
+    await fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formData.toString(),
+    });
+
     toast.success("Order submitted successfully!");
     confetti({ particleCount: 200, spread: 160, origin: { y: 0.6 } });
 
