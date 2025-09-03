@@ -28,15 +28,15 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const isAdminRoute = location.pathname.startsWith("/admin"); 
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
 
   useEffect(() => {
     const fetchBackendData = async () => {
       try {
         setLoading(true);
         setCrackers([]);
-        const response = await fetch(
-          `http://localhost:5000/api/crackers/customer?brand=${brand}`
-        );
+        const response = await fetch(`${API_BASE}/crackers/customer?brand=${brand}`);
         const data = await response.json();
 
         if (Array.isArray(data)) {

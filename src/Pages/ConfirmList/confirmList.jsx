@@ -38,9 +38,12 @@ const ConfirmListPage = ({
   downloaded,
   brand
 }) => {
-  const [setSelectedItemsPdf] = useState([]);
+  // const [setSelectedItemsPdf] = useState([]);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
 
   useEffect(() => {
     const handleBackButton = (event) => {
@@ -108,7 +111,7 @@ const handleConfirmOrder = async () => {
     return;
   }
 
-  setSelectedItemsPdf(selectedCrackers);
+  // setSelectedItemsPdf(selectedCrackers);
 
   const orderPayload = {
     customerName,
@@ -122,7 +125,7 @@ const handleConfirmOrder = async () => {
   };
 
   try {
-    const response = await fetch("http://localhost:5000/api/orders", {
+    const response = await fetch(`${API_BASE}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderPayload),

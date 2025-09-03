@@ -119,7 +119,7 @@ const [pages, setPages] = useState(1);
 
 
   // ✅ Fetch all or filter by brand
-  const fetchAll = async (brand = "", pageNo = 1, pageSize = 100) => {
+  const fetchAll = async (brand = "", pageNo = 1, pageSize = 500) => {
   try {
     setLoading(true);
     setError("");
@@ -140,7 +140,7 @@ const [pages, setPages] = useState(1);
 
     // Save pagination info
     setPage(data.page || 1);
-    setLimit(data.limit || 100);
+    setLimit(data.limit || 500);
     setTotal(data.total || list.length);
     setPages(data.pages || 1);
   } catch (e) {
