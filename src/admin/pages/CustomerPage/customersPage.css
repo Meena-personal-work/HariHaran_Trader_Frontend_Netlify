@@ -23,7 +23,7 @@
 .table-wrapper {
   overflow-x: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .customers-table {
@@ -135,7 +135,7 @@
 .table-wrapper {
   overflow-x: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   width: 100%;
 }
 
@@ -161,16 +161,15 @@
   .customers-table th,
   .customers-table td {
     padding: 1px;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .view-button,
   .whatsapp-button,
   .call-button,
   .dispatch-button {
-    padding: 4px 6px;
+    margin: 10px 6px;
     font-size: 10px;
-    margin-left: 2px;
   }
 
   .status {

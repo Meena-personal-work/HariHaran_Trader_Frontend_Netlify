@@ -116,8 +116,8 @@
 }
 
 .main-content {
-  margin-left: 220px; /* Push content so it doesn’t go under sidebar */
-  padding: 1rem;
+  margin-left: 250px; /* Push content so it doesn’t go under sidebar */
+  /* padding: 1rem; */
   flex: 1;
 }
 
@@ -137,5 +137,10 @@
 @media (max-width: 480px) {
   .layout{
     display:block ;
+    padding: 10px;
   }
+
+  .header {
+margin-top: 65px;
+}
 }

@@ -12,16 +12,17 @@
 //   FaFilePdf,
 // } from "react-icons/fa";
 // import "./customersPage.css";
-// const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
+// const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 // export default function CustomersPage() {
-//   const { customers, loading, error, fetchAll,deleteDispatched  } = useCustomers();
+//   const { customers, loading, error, fetchAll, deleteDispatched } =
+//     useCustomers();
 //   const [expandedRows, setExpandedRows] = useState({});
-//   const [initialCount, setInitialCount] = useState(0);
 //   const [statusMap, setStatusMap] = useState({});
 //   const [modalOpen, setModalOpen] = useState(false); // ✅ Track modal
-//   const [selectedId, setSelectedId] = useState(null); // ✅ Track which row clicked
+//   const [selectedId, setSelectedId] = useState(null); // ✅ Track row clicked
+//   const [modalAction, setModalAction] = useState(null); // ✅ Track which action (dispatch/delete)
 
 //   const pendingCount = customers.filter(
 //     (c) => statusMap[c._id] === "pending"
@@ -69,25 +70,37 @@
 //     }
 //   };
 
-//   // ✅ When clicking Dispatch button, open confirmation modal
+//   // ✅ When clicking Dispatch button
 //   const confirmDispatch = (id) => {
 //     setSelectedId(id);
+//     setModalAction("dispatch");
+//     setModalOpen(true);
+//   };
+
+//   // ✅ When clicking Delete All button
+//   const confirmDeleteDispatched = () => {
+//     setModalAction("delete");
 //     setModalOpen(true);
 //   };
 
 //   // ✅ Confirm action
 //   const handleConfirm = () => {
-//     if (selectedId) {
+//     if (modalAction === "dispatch" && selectedId) {
 //       handleDispatch(selectedId);
+//     }
+//     if (modalAction === "delete") {
+//       deleteDispatched();
 //     }
 //     setModalOpen(false);
 //     setSelectedId(null);
+//     setModalAction(null);
 //   };
 
 //   // ✅ Cancel action
 //   const handleCancel = () => {
 //     setModalOpen(false);
 //     setSelectedId(null);
+//     setModalAction(null);
 //   };
 
 //   if (loading) return <p className="status-message">Loading customers...</p>;
@@ -199,18 +212,25 @@
 //             ))}
 //           </tbody>
 //         </table>
-//         <div style={{ marginTop: "20px", textAlign: "center" }}>
-//   <button className="delete-button" onClick={deleteDispatched }>
-//     Delete All Dispatched Customers
-//   </button>
-// </div>
 
+//         <div style={{ marginTop: "20px", textAlign: "center" }}>
+//           <button
+//             className="delete-button"
+//             onClick={confirmDeleteDispatched} // ✅ Open modal instead of direct delete
+//           >
+//             Delete All Dispatched Customers
+//           </button>
+//         </div>
 //       </div>
 
 //       {/* ✅ Confirmation Modal */}
 //       <ConfirmModal
 //         open={modalOpen}
-//         message="Are you sure you want to change the status?"
+//         message={
+//           modalAction === "delete"
+//             ? "Are you sure you want to delete ALL dispatched customers?"
+//             : "Are you sure you want to change the status?"
+//         }
 //         onConfirm={handleConfirm}
 //         onCancel={handleCancel}
 //       />
@@ -218,10 +238,11 @@
 //   );
 // }
 
+
 import React, { useEffect, useState } from "react";
 import useCustomers from "../../hooks/useCustomers";
 import { CustomerPDF, CustomerPDFDownload } from "./CustomerPDF";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer, pdf } from "@react-pdf/renderer";
 import Header from "../../components/Header/header";
 import ConfirmModal from "../../components/ConfirmModal/confirmModal"; // ✅ Import modal
 import {
@@ -234,6 +255,9 @@ import {
 import "./customersPage.css";
 
 const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
+// ✅ Detect if user is on mobile
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default function CustomersPage() {
   const { customers, loading, error, fetchAll, deleteDispatched } =
@@ -321,6 +345,13 @@ export default function CustomersPage() {
     setModalOpen(false);
     setSelectedId(null);
     setModalAction(null);
+  };
+
+  // ✅ Open PDF in new tab (for mobile users)
+  const openPdfInNewTab = async (customer) => {
+    const blob = await pdf(<CustomerPDF customer={customer} />).toBlob();
+    const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
   };
 
   if (loading) return <p className="status-message">Loading customers...</p>;
@@ -418,13 +449,36 @@ export default function CustomersPage() {
                         <FaFilePdf /> Download
                       </CustomerPDFDownload>
 
-                      <div
-                        style={{ marginTop: "10px", border: "1px solid #ccc" }}
-                      >
-                        <PDFViewer width="100%" height={400}>
-                          <CustomerPDF customer={c} />
-                        </PDFViewer>
-                      </div>
+                      {/* ✅ Desktop: inline PDF, Mobile: open button */}
+                      {!isMobile ? (
+                        <div
+                          style={{
+                            marginTop: "10px",
+                            border: "1px solid #ccc",
+                          }}
+                        >
+                          <PDFViewer width="100%" height={400}>
+                            <CustomerPDF customer={c} />
+                          </PDFViewer>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => openPdfInNewTab(c)}
+                          style={{
+                            marginTop: "10px",
+                           padding: "8px 12px",
+                            background: "#007bff",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            marginLeft: "20px",
+
+                          }}
+                        >
+                          Open PDF
+                        </button>
+                      )}
                     </td>
                   </tr>
                 )}
