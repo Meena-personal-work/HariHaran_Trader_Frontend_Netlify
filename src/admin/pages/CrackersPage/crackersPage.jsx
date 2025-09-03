@@ -272,7 +272,7 @@ export default function CrackersPage() {
           {selectedBrand} Crackers ({items.length})
         </h2>
         {/* Pagination */}
-            <section className="pagination">
+            {/* <section className="pagination">
               <button onClick={handlePrevPage} disabled={page <= 1 || loading}>
                 Previous
               </button>
@@ -282,7 +282,7 @@ export default function CrackersPage() {
               <button onClick={handleNextPage} disabled={page >= pages || loading}>
                 Next
               </button>
-            </section>
+            </section> */}
         {loading ? (
           <div className="loading">Loading...</div>
         ) : (
